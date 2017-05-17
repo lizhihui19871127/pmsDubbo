@@ -1,0 +1,63 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <display-name>pms基础数据</display-name>
+    <description>pmsDataBase</description>
+
+    <!--log4j2的配置文件-->
+    <context-param>
+        <param-name>isLog4jAutoInitializationDisabled</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+    </listener>
+    <filter>
+        <filter-name>log4jServletFilter</filter-name>
+        <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>log4jServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>classpath:log4j2.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/applicationcontext.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!-- used to provide the ability to enter Chinese characters inside the Owner Form -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>
