@@ -10,6 +10,7 @@
             <list>
                 <value>classpath*:spring/test_jdbc.properties</value>
                 <value>classpath*:spring/test_dubbo-config.properties</value>
+                <value>classpath*:spring/test_redis.properties</value>
             </list>
         </property>
     </bean>

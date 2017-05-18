@@ -3,6 +3,7 @@ package com.xinwis.pms.service;
 import com.github.pagehelper.PageHelper;
 import com.xinwis.pms.exceptions.BiException;
 import com.xinwis.pms.model.Bi_building;
+import com.xinwis.pms.util.redis.RedisKeyManage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,15 +27,22 @@ import java.util.List;
 public class TestBiBuildingService {
 	@Resource
 	private BiBuildingService biBuildingService;
+	@Resource
+	private RedisKeyManage redisKeyManage;
 	@Test
 	public void testGetBiBuildingById(){
 		BigDecimal id = new BigDecimal("51602");
 		Bi_building bi_building = biBuildingService.getBiBuilding(id);
 		System.out.println(bi_building);
+		redisKeyManage.setTestRedis("success-lizhihui");
+		String testRedisValue = redisKeyManage.getTestRedis();
+		System.out.println(testRedisValue);
 	}
 
 	@Test
 	public void testGetAllBiBuildings(){
+		String testRedisValue = redisKeyManage.getTestRedis();
+		System.out.println(testRedisValue);
 		List<Bi_building> biBuildings = biBuildingService.getAllBiBuildings(2,5);
 		for (Bi_building bi_building:biBuildings){
 			System.out.println(bi_building);

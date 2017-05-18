@@ -10,6 +10,7 @@
             <list>
                 <value>classpath*:spring/jdbc.properties</value>
                 <value>classpath*:spring/dubbo-config.properties</value>
+                <value>classpath*:spring/redis.properties</value>
             </list>
         </property>
     </bean>
